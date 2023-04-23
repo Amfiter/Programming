@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace Programming.Models.Enums
 {
     internal enum EducationForm

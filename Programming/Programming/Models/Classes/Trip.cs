@@ -1,24 +1,33 @@
-﻿
-
-namespace Programming.Models.Classes
+﻿namespace Programming.Models.Classes
 {
     internal class Trip
     {
-        private string Departure_Point { get; set; }
-        private string Destination { get; set; }
-        private int Flight_time { get; set; }
+        private string _departurePoint;
+        private int _flightTime;
+        private string _destination;
+
+        public string DeparturePoint { get; set; }
+
+        public int FlightTime
+        {
+            get { return _flightTime; }
+            set { _flightTime = Validator.AssertOnPositiveValue(value); }
+        }
+
+        public string Destination { get; set; }
 
         public Trip(string dp, string ds, int time)
         {
-            Departure_Point = dp;
+            DeparturePoint = dp;
             Destination = ds;
-            Flight_time = time;
-        } 
+            FlightTime = time;
+        }
+
         private void Check(int time)
         {
             if (time <= 0.0)
             {
-                Flight_time = time;
+                FlightTime = time;
             }
             else
             {

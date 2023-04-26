@@ -43,12 +43,18 @@
             label9 = new Label();
             MovieListBox = new ListBox();
             groupBox2 = new GroupBox();
+            label14 = new Label();
+            IdTextBox = new TextBox();
+            CoordinateY = new Label();
+            YCoordinateTextBox = new TextBox();
+            XCoordinateTextBox = new TextBox();
+            XCoordinate = new Label();
             FindButton = new Button();
             ColorTextBox = new TextBox();
             label8 = new Label();
             WidthTextBox = new TextBox();
             label7 = new Label();
-            HeightTextBox = new TextBox();
+            LengthTextBox = new TextBox();
             label6 = new Label();
             RectListBox = new ListBox();
             tabPage1 = new TabPage();
@@ -91,7 +97,6 @@
             ClassTabPage.TabIndex = 1;
             ClassTabPage.Text = "Classes";
             ClassTabPage.UseVisualStyleBackColor = true;
-            //ClassTabPage.Click += ClassTabPage_Click; // удалить эту строчку
             // 
             // groupBox4
             // 
@@ -226,12 +231,18 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label14);
+            groupBox2.Controls.Add(IdTextBox);
+            groupBox2.Controls.Add(CoordinateY);
+            groupBox2.Controls.Add(YCoordinateTextBox);
+            groupBox2.Controls.Add(XCoordinateTextBox);
+            groupBox2.Controls.Add(XCoordinate);
             groupBox2.Controls.Add(FindButton);
             groupBox2.Controls.Add(ColorTextBox);
             groupBox2.Controls.Add(label8);
             groupBox2.Controls.Add(WidthTextBox);
             groupBox2.Controls.Add(label7);
-            groupBox2.Controls.Add(HeightTextBox);
+            groupBox2.Controls.Add(LengthTextBox);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(RectListBox);
             groupBox2.Location = new Point(8, 15);
@@ -243,9 +254,60 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Rectangles";
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(219, 21);
+            label14.Name = "label14";
+            label14.Size = new Size(17, 15);
+            label14.TabIndex = 13;
+            label14.Text = "Id";
+            // 
+            // IdTextBox
+            // 
+            IdTextBox.Location = new Point(214, 39);
+            IdTextBox.Name = "IdTextBox";
+            IdTextBox.ReadOnly = true;
+            IdTextBox.Size = new Size(166, 23);
+            IdTextBox.TabIndex = 12;
+            // 
+            // CoordinateY
+            // 
+            CoordinateY.AutoSize = true;
+            CoordinateY.Location = new Point(219, 233);
+            CoordinateY.Name = "CoordinateY";
+            CoordinateY.Size = new Size(74, 15);
+            CoordinateY.TabIndex = 11;
+            CoordinateY.Text = "Y coordinate";
+            // 
+            // YCoordinateTextBox
+            // 
+            YCoordinateTextBox.Location = new Point(214, 251);
+            YCoordinateTextBox.Name = "YCoordinateTextBox";
+            YCoordinateTextBox.ReadOnly = true;
+            YCoordinateTextBox.Size = new Size(163, 23);
+            YCoordinateTextBox.TabIndex = 10;
+            // 
+            // XCoordinateTextBox
+            // 
+            XCoordinateTextBox.Location = new Point(214, 207);
+            XCoordinateTextBox.Name = "XCoordinateTextBox";
+            XCoordinateTextBox.ReadOnly = true;
+            XCoordinateTextBox.Size = new Size(163, 23);
+            XCoordinateTextBox.TabIndex = 9;
+            // 
+            // XCoordinate
+            // 
+            XCoordinate.AutoSize = true;
+            XCoordinate.Location = new Point(217, 189);
+            XCoordinate.Name = "XCoordinate";
+            XCoordinate.Size = new Size(76, 15);
+            XCoordinate.TabIndex = 8;
+            XCoordinate.Text = "X Coordinate";
+            // 
             // FindButton
             // 
-            FindButton.Location = new Point(246, 261);
+            FindButton.Location = new Point(249, 292);
             FindButton.Margin = new Padding(3, 2, 3, 2);
             FindButton.Name = "FindButton";
             FindButton.Size = new Size(82, 22);
@@ -256,7 +318,7 @@
             // 
             // ColorTextBox
             // 
-            ColorTextBox.Location = new Point(217, 176);
+            ColorTextBox.Location = new Point(215, 164);
             ColorTextBox.Margin = new Padding(3, 2, 3, 2);
             ColorTextBox.Name = "ColorTextBox";
             ColorTextBox.Size = new Size(165, 23);
@@ -266,7 +328,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(217, 159);
+            label8.Location = new Point(217, 147);
             label8.Name = "label8";
             label8.Size = new Size(39, 15);
             label8.TabIndex = 5;
@@ -274,7 +336,7 @@
             // 
             // WidthTextBox
             // 
-            WidthTextBox.Location = new Point(217, 110);
+            WidthTextBox.Location = new Point(215, 122);
             WidthTextBox.Margin = new Padding(3, 2, 3, 2);
             WidthTextBox.Name = "WidthTextBox";
             WidthTextBox.Size = new Size(165, 23);
@@ -284,28 +346,28 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(217, 93);
+            label7.Location = new Point(214, 105);
             label7.Name = "label7";
             label7.Size = new Size(42, 15);
             label7.TabIndex = 3;
             label7.Text = "Width:";
             // 
-            // HeightTextBox
+            // LengthTextBox
             // 
-            HeightTextBox.Location = new Point(217, 44);
-            HeightTextBox.Margin = new Padding(3, 2, 3, 2);
-            HeightTextBox.Name = "HeightTextBox";
-            HeightTextBox.Size = new Size(165, 23);
-            HeightTextBox.TabIndex = 2;
+            LengthTextBox.Location = new Point(215, 80);
+            LengthTextBox.Margin = new Padding(3, 2, 3, 2);
+            LengthTextBox.Name = "LengthTextBox";
+            LengthTextBox.Size = new Size(165, 23);
+            LengthTextBox.TabIndex = 2;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(217, 26);
+            label6.Location = new Point(215, 63);
             label6.Name = "label6";
             label6.Size = new Size(47, 15);
             label6.TabIndex = 1;
-            label6.Text = "Lenght:";
+            label6.Text = "Length:";
             // 
             // RectListBox
             // 
@@ -561,7 +623,7 @@
         private Label label8;
         private TextBox WidthTextBox;
         private Label label7;
-        private TextBox HeightTextBox;
+        private TextBox LengthTextBox;
         private Label label6;
         private ListBox RectListBox;
         private TabPage tabPage1;
@@ -582,5 +644,11 @@
         private ListBox EnumsListBox;
         private Label label1;
         private TabControl TabControl;
+        private Label XCoordinate;
+        private TextBox XCoordinateTextBox;
+        private TextBox YCoordinateTextBox;
+        private Label CoordinateY;
+        private TextBox IdTextBox;
+        private Label label14;
     }
 }

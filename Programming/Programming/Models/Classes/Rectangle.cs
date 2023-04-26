@@ -2,13 +2,19 @@
 {
     //поправлю еще класс Rectangle
     //для того чтобы понять почему выпадает NullReferenceException
-    internal class Rectangle
+    public class Rectangle
     {
+        private int _id;
         private string _name;
         private double _width;
-        private double _height;
+        private double _length;
         private string _color;
 
+        private static int _allRectanglesCount;
+
+        public static int AllRectanglesCount { get { return _allRectanglesCount; } }
+
+        public int Id { get { return _id; } }
         public string Name { get; set; }
 
         public string Color { get; set; }
@@ -29,21 +35,23 @@
             }
         }
 
-        public double Height
+        public double Length
         {
-            get { return _height; }
+            get { return _length; }
             set
             {
                 if (value > 0.0d) //еще желательно писать буквы f и d в конце значений примитивов float, double
                 {
-                    _height = value;
+                    _length = value;
                 }
                 else
                 {
-                    throw new ArgumentException(String.Format("{0} не является подходящим числом", _height), "height");
+                    throw new ArgumentException(String.Format("{0} не является подходящим числом", _length), "height");
                 }
             }
         }
+
+        public Point2D Center { get; private set; }
 
 
         public Rectangle()
@@ -53,35 +61,22 @@
         public Rectangle(double width, double height, string color)
         {
             Width = width;
-            Height = height;
+            Length = height;
             Color = color;
+            double centerX = width / 2.0;
+            double centerY = height / 2.0;
+            Center = new Point2D(centerX, centerY);
+            _allRectanglesCount++;
+            _id = AllRectanglesCount;
+            
         }
-
-
-        /*private void Check(double width, double height)
-        {
-            if (width > 0.0 & height > 0.0)
-            {
-                Width = width;
-                Height = height;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format("{0} не является подходящим числом", width), "width");
-            }
-        }*/
+        
         public string[] answRec()
         {
-            string[] answ = { Name, Width.ToString(), Height.ToString(), Color };
+            string[] answ = { Name, Width.ToString(), Length.ToString(), Color };
             return answ;
         }
-
-        /*public void Chenge(double width, double height, string color)//непонятно зачем этот метод
-        {
-            Check(width, height);
-            Color = color;
-
-        }*/
+        
         public int FindRectangleWithMaxWidth()
         {
             return (int)Width;

@@ -12,7 +12,7 @@ namespace Programming
         private Rectangle[] _rectangles; //ты тут создаешь пять объектов rectangle,все поля по умолчанию заполняются null значениями, пункт 12 нужно проинициализировать массив _rectangles в конструкторе главного окна
 
         private Movie[] _movie;
-        private Rectangle _currentRectangle = new Rectangle();
+        private Rectangle _currentRectangle;
         private Movie _currentMovie = new Movie();
         private string[] _colors = { "Orange", "Black", "Red", "Green", "Blue" };
         private int max = 0;
@@ -111,16 +111,17 @@ namespace Programming
 
         private void ColorTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (HeightTextBox.Text != "" & WidthTextBox.Text != "" & ColorTextBox.Text != "")
+            if (LengthTextBox.Text != "" & WidthTextBox.Text != "" & ColorTextBox.Text != "")
             {
                 try
                 {
                     ColorTextBox.BackColor = Color.White;
-                    _currentRectangle = new Models.Classes.Rectangle(
-                        Convert.ToInt32(WidthTextBox.Text), 
+                    //в коде ниже постоянно создается объект,из за чего вызывается конструктор и поле id меняется, это не нужно делать при валидации
+                    /*_currentRectangle = new Models.Classes.Rectangle(
+                        Convert.ToInt32(WidthTextBox.Text),
                         Convert.ToInt32(HeightTextBox.Text),
                         ColorTextBox.Text);
-                    _rectangles[(int)RectListBox.SelectedIndex] = _currentRectangle;
+                    _rectangles[(int)RectListBox.SelectedIndex] = _currentRectangle;*/
                 }
                 catch
                 {
@@ -131,17 +132,17 @@ namespace Programming
 
         private void WidthTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (HeightTextBox.Text != "" & WidthTextBox.Text != "" & ColorTextBox.Text != "")
+            if (LengthTextBox.Text != "" & WidthTextBox.Text != "" & ColorTextBox.Text != "")
             {
                 try
                 {
                     WidthTextBox.BackColor = Color.White;
-                    _currentRectangle = new Models.Classes.Rectangle(
+                    //в коде ниже постоянно создается объект,из за чего вызывается конструктор и поле id меняется, это не нужно делать при валидации
+                    /*_currentRectangle = new Models.Classes.Rectangle(
                         Convert.ToInt32(WidthTextBox.Text),
                         Convert.ToInt32(HeightTextBox.Text),
-                        ColorTextBox.Text);// тут была ошибка из-за чего значения height и width менялись местами при выборе прямоугольника из списка
-                                           // значения записывались в конструктор неправильно (как записывалось Rectangle(height,width,color) => как надо Rectangle(width,height,color)
-                    _rectangles[(int)RectListBox.SelectedIndex] = _currentRectangle;
+                        ColorTextBox.Text);
+                    _rectangles[(int)RectListBox.SelectedIndex] = _currentRectangle;*/
                 }
                 catch
                 {
@@ -152,19 +153,13 @@ namespace Programming
 
         private void RectListBox_SelectedIndexChanged(object sender, EventArgs e) // в этом методе баг, при выборе прямоугольника значения height и width меняются,
         {
-            //string[] answr = _rectangles[RectListBox.SelectedIndex].answRec(); // метод answRec работает некорекктно, возможно порядок значений которые получают по индексу не сохраняется, поэтому width и height меняются местами
-            //LenghtTextBox.Text = answr[2];
-            //WidthTextBox.Text = answr[1];
-            //ColorTextBox.Text = answr[3];
-            //_currentRectangle = _rectangles[(int)RectListBox.SelectedIndex];
-
-            //желательно присваивать через поля объекта, а не через индексы, потому что:
-            //1. так человекочитаемо и понятно
-            //2. если присваивать через индексы, можно запутаться и ошибиться
             Rectangle answr = _rectangles[RectListBox.SelectedIndex];
+            IdTextBox.Text = answr.Id.ToString();
             ColorTextBox.Text = answr.Color.ToString();
-            HeightTextBox.Text =answr.Height.ToString();
+            LengthTextBox.Text = answr.Length.ToString();
             WidthTextBox.Text = answr.Width.ToString();
+            XCoordinateTextBox.Text = answr.Center.X.ToString();
+            YCoordinateTextBox.Text = answr.Center.Y.ToString();
             _currentRectangle = _rectangles[(int)RectListBox.SelectedIndex];
         }
 
@@ -204,17 +199,17 @@ namespace Programming
         // ну и заодно перенесем логику метода в отдельный метод InitRectanglesAndMovies
         // разбей инициализацию прямоугольников и фильмов на два метода, сейчас у тебя метод делает логику с объектами не связанную друг с другом по смыслу
         // почитай про Single Responsibility паттерн( один из парадигм SOLID )
-        private void InitRectanglesAndMovies() 
+        private void InitRectanglesAndMovies()
         {
             Random rd = new Random();
             for (int i = 0; i < _rectangles.Length; i++)
             {
                 _rectangles[i] = new Rectangle(Convert.ToDouble(rd.Next(1, 244)),
                     Convert.ToDouble(rd.Next(1, 244)), _colors[rd.Next(0, 4)]);
-                    //RectListBox.Items.Add($"Rectangle {i + 1}");// это строка не нужна либо если ты хочешь переписывать объект который уже хранится в листе тебе нужно вызвать по индексу объект из массива
-                    //либо если ты хочешь добавлять прямоугольники не обновляя старые, тебе нужно для начала очистить старый лист от пустых объектов с помощью метода Clear
-                    RectListBox.Items[i] = ($"Rectangle {i + 1}");
-                    //ошибки NullReferenseException возникали потому что ты тут переписываешь поля объектов в массиве а потом зачем то добавляешь в RectListBox пустой объект с имененм Rectangle {i + 1} 
+                //RectListBox.Items.Add($"Rectangle {i + 1}");// это строка не нужна либо если ты хочешь переписывать объект который уже хранится в листе тебе нужно вызвать по индексу объект из массива
+                //либо если ты хочешь добавлять прямоугольники не обновляя старые, тебе нужно для начала очистить старый лист от пустых объектов с помощью метода Clear
+                RectListBox.Items[i] = ($"Rectangle {i + 1}");
+                //ошибки NullReferenseException возникали потому что ты тут переписываешь поля объектов в массиве а потом зачем то добавляешь в RectListBox пустой объект с имененм Rectangle {i + 1} 
             }
 
             RectListBox.SetSelected(0, true);

@@ -1,30 +1,32 @@
-﻿namespace Programming.Models.Classes
+﻿using System.Diagnostics;
+using System.Reflection;
+
+namespace Programming.Models.Classes
 {
     internal class Music
     {
-        private string Group { get; set; }
-        private string Genre { get; set; }
-        private string Song { get; set; }
-        private int Count { get; set; }
+        private string _group;
+        private string _genre;
+        private string _song;
+        private int _count;
+        public string Group { get; set; }
+        public string Genre { get; set; }
+        public string Song { get; set; }
+        public int Count
+        {
+            get { return _count;}
+            set
+            {
+                _count = Validator.AssertOnPositiveValue(value);
+            } 
+        }
 
         public Music(string group, string genre, string song, int count)
         {
             Group = group;
             Genre = genre;
             Song = song;
-            Check(count);
-        }
-
-        private void Check(int count)
-        {
-            if (count > 0)
-            {
-                Count = count;
-            }
-            else
-            {
-                throw new ArgumentException(String.Format("{0} не является подходящим числом", count), "count");
-            }
+            Count = count;
         }
     }
 }
